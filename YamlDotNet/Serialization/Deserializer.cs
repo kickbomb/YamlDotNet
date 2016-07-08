@@ -85,16 +85,16 @@ namespace YamlDotNet.Serialization
             typeDescriptor.TypeDescriptor =
                 new CachedTypeInspector(
                     new YamlAttributesTypeInspector(
-                        new YamlAttributeOverridesInspector(
-                            new NamingConventionTypeInspector(
+                        new NamingConventionTypeInspector(
+                            new YamlAttributeOverridesInspector(
                                 new ReadableAndWritablePropertiesTypeInspector(
                                     new ReadablePropertiesTypeInspector(
                                         new StaticTypeResolver()
                                     )
                                 ),
-                                namingConvention
+                                overrides
                             ),
-                            overrides
+                            namingConvention
                         )
                     )
                 );
