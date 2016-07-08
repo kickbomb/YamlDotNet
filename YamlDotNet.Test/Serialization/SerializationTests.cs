@@ -1254,5 +1254,27 @@ namespace YamlDotNet.Test.Serialization
 
             Assert.Contains("\"00000000-0000-0000-0000-000000000000\"", yamlAsJson.ToString());
         }
+
+        public class Foo
+        {
+            public bool IsRequired { get; set; }
+        }
+
+        [Fact]
+        public void AttributeOverridesAndNamingConventionDoNotConflict()
+        {
+            var overrides = new YamlAttributeOverrides();
+            overrides.Add(typeof(Foo), "IsRequired", new YamlMemberAttribute
+            {
+                Alias = "Required"
+            });
+
+            var namingConvention = new CamelCaseNamingConvention();
+
+            var deserializer = new Deserializer(namingConvention: namingConvention, overrides: overrides);
+            var deserializedFoo = deserializer.Deserialize<Foo>(Yaml.ReaderForText("{ Required: true }"));
+
+            Assert.True(deserializedFoo.IsRequired);
+        }
     }
 }
