@@ -23,9 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Linq.Expressions;
 using YamlDotNet.Core;
-using YamlDotNet.Helpers;
 
 namespace YamlDotNet.Serialization
 {
@@ -97,7 +95,7 @@ namespace YamlDotNet.Serialization
                     {
                         return currentPriority;
                     }
-                    currentType = currentType.BaseType;
+                    currentType = currentType.BaseType();
                 }
 
                 if (matchType.GetInterfaces().Contains(matchType))

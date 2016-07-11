@@ -275,6 +275,11 @@ namespace YamlDotNet
         {
         	return o.GetType() == type || o.GetType().GetTypeInfo().IsSubclassOf(type);
         }
+
+        public static Type BaseType(this Type type)
+        {
+            return type.GetTypeInfo().BaseType;
+        }
     }
 
     internal enum TypeCode
@@ -406,6 +411,11 @@ namespace YamlDotNet
         public static bool IsInstanceOf(this Type type, object o)
         {
         	return type.IsInstanceOfType(o);
+        }
+
+        public static Type BaseType(this Type type)
+        {
+            return type.BaseType;
         }
     }
 
