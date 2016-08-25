@@ -40,7 +40,14 @@ namespace YamlDotNet.Core
         public EventReader(IParser parser)
         {
             this.parser = parser;
-            MoveNext();
+            if (parser.Current == null)
+            {
+                MoveNext();
+            }
+            else
+            {
+                endOfStream = false;
+            }
         }
 
         /// <summary>
